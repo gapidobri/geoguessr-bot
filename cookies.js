@@ -1,5 +1,6 @@
-import puppeteer from 'puppeteer'
-import fs from 'fs'
+const puppeteer = require('puppeteer')
+const fs = require('fs')
+require('dotenv').config()
 
 const browser = await puppeteer.launch({
     headless: false
@@ -9,10 +10,10 @@ const page = await browser.newPage()
 await page.goto('https://www.geoguessr.com/signin')
 
 await page.waitForSelector('input[name=email]')
-await page.type('input[name=email]', 'geoguesserbeans@gmail.com')
+await page.type('input[name=email]', process.env.EMAIL)
 
 await page.waitForSelector('input[name=password]')
-await page.type('input[name=password]', 'H"4s/#an)+"@G`>]s')
+await page.type('input[name=password]', process.env.PASSWORD)
 
 await page.waitForSelector('button[type=submit]')
 await page.click('button[type=submit]')
